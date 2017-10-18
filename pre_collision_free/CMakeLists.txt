@@ -7,11 +7,12 @@ project(pre_collision_free)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS cv_bridge image_transport sensor_msgs std_msgs
+find_package(catkin REQUIRED COMPONENTS sensor_msgs std_msgs
   roscpp rospy tf geometry_msgs trajectory_msgs
   trac_ik_lib
   kdl_conversions
   eigen_conversions
+  moveit_ros_planning_interface
 )
 
 find_package(OpenCV REQUIRED)
@@ -161,18 +162,13 @@ include_directories(include
 #target_link_libraries(repulsivevector
 #    ${catkin_LIBRARIES} ${OpenCV_LIBRARIES}
 #    )
+add_library(ur5_moveit src/ur5_moveit.cpp
+    )
+#add_executable(ur5_moveit src/ur5_moveit.cpp)
+add_executable(main src/main.cpp)
 
-add_executable(robot_control src/robot_control.cpp)
-add_executable(robot_control_position src/robot_control_position.cpp)
-add_executable(robot_control_velocity src/robot_control_velocity.cpp)
-#add_executable(robot_control_velocity_test2 src/robot_control_velocity_test2.cpp)
-target_link_libraries(robot_control
-    ${catkin_LIBRARIES} ${OpenCV_LIBRARIES}
-    )
-target_link_libraries(robot_control_position
-    ${catkin_LIBRARIES}
-    )
-target_link_libraries(robot_control_velocity
+target_link_libraries(main
+    ur5_moveit
     ${catkin_LIBRARIES}
     )
 #target_link_libraries(robot_control_velocity_test2
