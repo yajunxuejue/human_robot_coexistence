@@ -5,9 +5,9 @@ IncorporateDsmApf::IncorporateDsmApf(Eigen::Vector3f & repulsive_vector_, Eigen:
 {
   replulsive_vector = repulsive_vector_;
   min_distance = min_distance_;
+  raw_velocity = raw_velocity_;
   direction_repvector_rawspeed = getDirection(repulsive_vector_, raw_velocity_);
   calculateModulationMatrix(repulsive_vector_);
-  calculateModulatedVelocity(raw_velocity_);
 }
 
 float IcorporateDsmApf::calculateMagunitude(float &distance)
@@ -40,9 +40,9 @@ void IncorporateDsmApf::calculateModulationMatrix(Eigen::Vector3f &repulsive_vec
   }
 }
 
-void IncorporateDsmApf::calculateModulatedVelocity(const Eigen::Vector3f &raw_speed_)
+void IncorporateDsmApf::calculateModulatedVelocity(Eigen::Vector3f & modulated_velocity_out)
 {
-  modulated_velocity = modulation_matrix * raw_speed_;
+  modulated_velocity_out = modulation_matrix * raw_velocity;
 }
 
 IncorporateDsmApf::~IncorporateDsmApf()
@@ -59,9 +59,4 @@ bool IncorporateDsmApf::getDirection(Eigen::Vector3f &rep_vector, Eigen::Vector3
   else{
    return false;
   }
-}
-
-Eigen::Vector3f IncorporateDsmApf::getModulatedVelocity() const
-{
-  return modulated_velocity;
 }
