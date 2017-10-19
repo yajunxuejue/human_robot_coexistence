@@ -1,5 +1,7 @@
 #include "pre_collision_free/IncorporateDsmApf.h"
 
+namespace pre_collision_free {
+
 //public functions
 IncorporateDsmApf::IncorporateDsmApf(Eigen::Vector3f & repulsive_vector_, Eigen::Vector3f &raw_velocity_, float & min_distance_)
 {
@@ -60,3 +62,4 @@ bool IncorporateDsmApf::getDirection(Eigen::Vector3f &rep_vector, Eigen::Vector3
    return false;
   }
 }
+}//end namespace

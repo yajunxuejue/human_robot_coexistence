@@ -4,6 +4,8 @@
 
 #include <Eigen/Geometry>
 
+namespace pre_collision_free {
+
 /**
   \brief Incorporating the method of dyanimcial system modulation and repulsive vector field to generate reactive
   motion for a robot treated as a control point.
@@ -61,4 +63,5 @@ public:
 
   ~IncorporateDsmApf();
 };
+} //end namespace
 #endif
